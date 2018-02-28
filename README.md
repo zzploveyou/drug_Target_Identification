@@ -1,5 +1,5 @@
 ﻿>method from
-"**2015#Lin Wu#Network Output Controllability-Based Method for Drug Target Identification**"
+[Network Output Controllability-Based Method for Drug Target Identification - IEEE Journals & Magazine](http://ieeexplore.ieee.org/document/7021908/)
 
 python package:
 [munkres — Munkres implementation for Python](http://software.clapper.org/munkres/)
