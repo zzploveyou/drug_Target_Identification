@@ -17,6 +17,7 @@ def test():
     epsilon = 0.001
 
     # read graph and calculate matrix A
+    print("read graph from: {}".format(filename))
     G = nx.digraph.DiGraph()
     for line in open(filename):
         tmp = line.strip().split()
@@ -26,9 +27,11 @@ def test():
     A = cal_A(G)
 
     # read C matrix(important nodes)
+    print("read 'out' from: {}".format(outfile))
     V0 = set([i.strip() for i in open(outfile).readlines()])
 
     # read ControlCentrality data
+    print("read controlcentrality from: {}".format(ccfile))
     rcc = {}
     rank = N
     for line in open(ccfile):
@@ -53,14 +56,21 @@ def test():
             R[i][i+N] = epsilon*rcc[node]
         else:
             R[i][i+N] = epsilon*rcc[node] - 1
+    # print("\nthe weights of the bipartite graph:")
+    # print(R)
 
     # KM allocate algorithm
     cost_matrix = -R
     m = Munkres()
     indexes = m.compute(cost_matrix)
 
+    # Results
+    print("\nresults:\n")
     for row, col in indexes:
-        print "{}, {}".format(Nodes[row], Nodes[col])
+        if Nodes[col] in G.nodes():
+            print "R-{}, C-{}".format(Nodes[row], Nodes[col])
+        else:
+            print "R-{}, {}".format(Nodes[row], Nodes[col])
 
 
 if __name__ == '__main__':
